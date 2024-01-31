@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Information Table</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    th {
+      background-color: #f49a9a;
+    }
+    .view-btn .delete-btn{
+      background-color: rgb(62, 62, 255);
+      color: #fff;
+      padding: 5px;
+    }
+    .btn{
+      background-color: #4039d0;
+      color: #fff;
+      padding: 5px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>User Information Table</h2>
+  <form action="">
+    {% csrf_token %}
+  <table>
+
+      <tr>
+        <th>List No</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>conform_password</th>
+        <th>View</th>
+        <th>Delete</th>
+      </tr>
+
+      {% for i in cr %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.username}}</td>
+            <td>{{i.age}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.password}}</td>
+            <td>{{i.conform_password}}</td>
+            <td><a  href="{% url 'detailview' i.id %}" class="btn btn-primary">VIEW</a></td>
+            <td><a href="{% url 'deleted' i.id %}" class="btn btn-primary">DELETE</a></td>
+            <td><a  href="{% url 'update' i.id %}" class="btn btn-primary">UPDATE</a></td>
+            
+        </tr>
+      {% endfor %}  
+
+    </table>
+    </form>
+   
+</body>
+</html>
